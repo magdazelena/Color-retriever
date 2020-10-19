@@ -17,7 +17,7 @@ const getColors = async (order, callback) => {
 const colors = () => {
 	const launchArgs = process.argv;
 	const colorOrder = [];
-	let outputType = 'all';
+	let outputType = 'hex';
 	if (launchArgs.length === 2) {
 		//program was launched without arguments
 		let questions = [
@@ -36,17 +36,24 @@ const colors = () => {
 		});
 	} else {
 		//program was launched with arguments
-		for (let i = 2; i < launchArgs.length - 1; i++) {
-			colorOrder.push(launchArgs[i]);
+		if (launchArgs[2] === 'default') {
+			//set default colors and order
+			colorOrder.push(...['green', 'blue', 'red'])
+		} else {
+			//colors and orders choice is manual
+			for (let i = 2; i < launchArgs.length - 1; i++) {
+				colorOrder.push(launchArgs[i]);
+			}
+
+			//check if output type is provided or forgotten
+			let lastArg = launchArgs[launchArgs.length - 1];
+			if (lastArg === "rgb" || lastArg === "all" || lastArg === "hex") {
+				outputType = launchArgs[launchArgs.length - 1];
+			} else {
+				colorOrder.push(lastArg);
+			}
 		}
 
-		//check if output type is provided or forgotten
-		let lastArg = launchArgs[launchArgs.length - 1];
-		if (lastArg === "rgb" || lastArg === "all" || lastArg === "hex") {
-			outputType = launchArgs[launchArgs.length - 1];
-		} else {
-			colorOrder.push(lastArg);
-		}
 
 		printResult(colorOrder, outputType);
 	}
@@ -57,14 +64,14 @@ const printResult = (colorOrder, outputType) => {
 		colors = await Promise.all(colors);
 		for (const color of colors) {
 			switch (outputType) {
-				case 'hex':
-					console.log(color.HEX);
+				case 'all':
+					console.log(color.name + " = hex: " + color.HEX + " rgb: " + color.RGB.R + ', ' + color.RGB.G + ', ' + color.RGB.B)
 					break;
 				case 'rgb':
 					console.log(color.RGB.R + ',' + color.RGB.G + ',' + color.RGB.B);
 					break;
 				default:
-					console.log(color.name + " = hex: " + color.HEX + " rgb: " + color.RGB.R + ', ' + color.RGB.G + ', ' + color.RGB.B)
+					console.log(color.HEX);
 					break;
 			}
 		}

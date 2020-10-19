@@ -24,13 +24,13 @@ Returns the ask colors in specific format.
 # How to use it:
 1. Run the program using:
 ```
-npm run-scripts run
+npm run-script run
 ```
 You will be prompted for more information
 
 2. Run the program using:
 ```
-npm run-scripts get-colors [args]
+npm run-script get-colors [args]
 ```
 to instantly get results. 
 Args can be:
