@@ -4,7 +4,9 @@
   "description": "A code challenge used to assess developers knowledge and skills",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node src/index",
+    "get-colors": "node src/index $*"
   },
   "repository": {
     "type": "git",
