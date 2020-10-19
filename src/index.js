@@ -1,29 +1,6 @@
 const { getColor } = require('./apiMock');
 const { getAnswers } = require('./askQuestions');
-
-class Color {
-	constructor(name) {
-		this.name = name
-	}
-}
-
-class Green extends Color {
-	constructor() {
-		super('green');
-	}
-}
-
-class Blue extends Color {
-	constructor() {
-		super('blue');
-	}
-}
-
-class Red extends Color {
-	constructor() {
-		super('Red');
-	}
-}
+//const { createObjects } = require('./colors');
 
 const getColors = async (order, callback) => {
 	const colors = [];
@@ -31,6 +8,8 @@ const getColors = async (order, callback) => {
 		let color = await getColor(colorName);
 		colors.push(color);
 	}
+	//if we wanted class objects for any reason
+	//createObjects(colors);
 	callback(colors);
 	return colors;
 }
@@ -76,22 +55,18 @@ const colors = () => {
 const printResult = (colorOrder, outputType) => {
 	getColors(colorOrder, async function (colors) {
 		colors = await Promise.all(colors);
-		switch (outputType) {
-			case 'hex':
-				for (const color of colors) {
+		for (const color of colors) {
+			switch (outputType) {
+				case 'hex':
 					console.log(color.HEX);
-				}
-				return;
-			case 'rgb':
-				for (const color of colors) {
+					break;
+				case 'rgb':
 					console.log(color.RGB.R + ',' + color.RGB.G + ',' + color.RGB.B);
-				}
-				return;
-			default:
-				for (const color of colors) {
+					break;
+				default:
 					console.log(color.name + " = hex: " + color.HEX + " rgb: " + color.RGB.R + ', ' + color.RGB.G + ', ' + color.RGB.B)
-				}
-				return;
+					break;
+			}
 		}
 	});
 }
