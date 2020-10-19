@@ -1,5 +1,5 @@
-# code-challenge
-A code challenge used to assess developers knowledge and skills
+# Copyrightagent code-challenge
+My solution to the code challenge
 
 ### Scenario
 A developer has tried to do a task that you must now take over and complete.
@@ -15,3 +15,25 @@ The API mock must not be changed and must be used.
 ##### Additional requirements
 - The program must also support the colors white and black.
 - The program must also return the RGB values.
+
+# How it works
+Returns the ask colors in specific format.
+**Colors**: blue, white, green, black, red.
+**Possible formats**: RGB, HEX, both. 
+
+# How to use it:
+1. Run the program using:
+```
+npm run-scripts run
+```
+You will be prompted for more information
+
+2. Run the program using:
+```
+npm run-scripts get-colors [args]
+```
+to instantly get results. 
+Args can be:
+- `default` to get colors green, blue and red in hex format
+- color names separated by space to get specific colors in specific order in hex format, ex: `blue red white`
+- color names separated by space and output type; works as above but you can get more information like RGB or all the formats with the name. Possible values: `all`, `rgb`, `hex`. Example: `blue red white rgb`
